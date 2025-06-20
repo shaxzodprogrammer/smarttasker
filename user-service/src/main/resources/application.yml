@@ -1,20 +1,22 @@
-server:
-  port: 8080
-
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tasker
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/tasker}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-  jackson:
-    serialization:
-      indent_output: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
 jwt:
-  secret: super_secret_key_123
+  secret: ${JWT_SECRET:Gk3jDnYv89xAZu7Tsd49PqLeN19cnqmWVmQZkVvX52kXtK3bC4m8PLhEr9sJQaBd}
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
