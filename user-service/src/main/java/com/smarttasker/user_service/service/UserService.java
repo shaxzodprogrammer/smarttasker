@@ -4,6 +4,7 @@ import com.smarttasker.user_service.dto.JwtResponse;
 import com.smarttasker.user_service.dto.LoginRequest;
 import com.smarttasker.user_service.dto.UserRegisterRequest;
 import com.smarttasker.user_service.entity.User;
+import com.smarttasker.user_service.model.Role;
 import com.smarttasker.user_service.repository.UserRepository;
 import com.smarttasker.user_service.security.jwt.JwtUtil;
 import io.jsonwebtoken.Jwts;
@@ -39,7 +40,7 @@ public class UserService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER");
+        user.setRole(Role.USER);
 
         return ResponseEntity.ok(userRepo.save(user));
     }
@@ -52,7 +53,7 @@ public class UserService {
             throw new BadCredentialsException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
         return new JwtResponse(token, user.getUsername(), user.getEmail(), user.getRole());
     }

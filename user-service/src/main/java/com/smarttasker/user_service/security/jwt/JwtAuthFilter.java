@@ -64,12 +64,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 if (userOpt.isPresent()) {
                     User user = userOpt.get();
-                    System.out.println("[JWT Filter] User role: " + user.getRole());
+                    System.out.println("[JWT Filter] User role: " + user.getRole().name());
 
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             user,
                             null,
-                            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
                     );
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);

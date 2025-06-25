@@ -1,5 +1,6 @@
 package com.smarttasker.user_service.entity;
 
+import com.smarttasker.user_service.model.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class User {
 
     private String password;
 
-    private String role; // USER / ADMIN
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }

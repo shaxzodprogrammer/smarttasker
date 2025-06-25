@@ -6,3 +6,19 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+# Java
+target/
+*.log
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+
+# Env
+.env

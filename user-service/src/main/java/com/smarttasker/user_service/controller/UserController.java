@@ -39,7 +39,6 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
-            System.out.println( "sukaaaa" + authentication.getPrincipal().toString());
         if (authentication == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }

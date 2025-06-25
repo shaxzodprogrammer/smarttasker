@@ -1,5 +1,6 @@
 package com.smarttasker.user_service.dto;
 
+import com.smarttasker.user_service.model.Role;
 import lombok.Getter;
 
 /**
@@ -11,9 +12,9 @@ public class JwtResponse {
     private String token;
     private String username;
     private String email;
-    private String role;
+    private Role role;
 
-    public JwtResponse(String token, String username, String email, String role) {
+    public JwtResponse(String token, String username, String email, Role role) {
         this.token = token;
         this.username = username;
         this.email = email;

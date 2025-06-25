@@ -24,7 +24,8 @@ services:
       context: ./user-service
     container_name: user_service
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
@@ -37,9 +38,26 @@ services:
     networks:
       - backend
 
+  task-service:
+    build:
+      context: ./task-service
+    container_name: task_service
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/task_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_SECRET: Gk3jDnYv89xAZu7Tsd49PqLeN19cnqmWVmQZkVvX52kXtK3bC4m8PLhEr9sJQaBd
+    networks:
+      - backend
+
 volumes:
   postgres_data:
 
 networks:
   backend:
-
